@@ -2,9 +2,8 @@
   "name": "equilibrius",
   "private": true,
   "scripts": {
-    "start":"yarn workspace @equilibrius/web start",
-    "start:api":"yarn workspace @equilibrius/api start",
-    "build":"yarn workspace @equilibrius/web build",
+    "start":"yarn workspace @equilibrius/api start",
+    "build":"yarn workspace @equilibrius/api build",
     "prettier": "prettier --ignore-path .gitignore --write \"**/*.+(js|json|ts|tsx)\""
   },
   "workspaces": {
