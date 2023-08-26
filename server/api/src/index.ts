@@ -4,6 +4,7 @@ import express from "express";
 import mongoose from "mongoose";
 
 import Config from "./config";
+import AccountRoutes from "./routes/account.routes";
 import testRoutes from "./routes/test.routes";
 
 const app = express();
@@ -24,6 +25,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use("/api/test", testRoutes);
+app.use("/api/accounts", AccountRoutes);
 // app.use("/api/ai", openAIRoutes);
 // app.use("/api/stream", streamRoutes);
 
