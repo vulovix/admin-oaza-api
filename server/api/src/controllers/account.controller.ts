@@ -45,6 +45,7 @@ const AccountController = {
         if (success) {
           const token = jwt.sign({ user: user._id }, Config.ACCOUNT_SECRET, { expiresIn: "8h" });
           user.password = undefined;
+          user.emailConfirmed = undefined;
           const isSecureCookie = process.env.NODE_ENV === "production";
           res.cookie("Authorization", token, {
             expires: DateHelper.dateAdd(new Date(), "hour", 8),
