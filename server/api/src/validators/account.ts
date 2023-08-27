@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-const AccountSchema = {
+const AccountValidator = {
   login: Joi.object().keys({
     email: Joi.string().email().required(),
     password: Joi.string().required(),
@@ -17,4 +17,4 @@ const AccountSchema = {
   }),
 };
 
-export default AccountSchema;
+export default AccountValidator;

@@ -1,10 +1,10 @@
 import router from "express-promise-router";
 
-import AccountController from "../controllers/account.controller";
-import RouterHelper from "../helpers/route.helper";
-import tokenMiddleware from "../middlewares/token.middleware";
-import AccountSchema from "../schemas/account.schema";
-const { login, register, update } = AccountSchema;
+import AccountController from "../controllers/account";
+import RouterHelper from "../helpers/route";
+import tokenMiddleware from "../middlewares/token";
+import AccountValidator from "../validators/account";
+const { login, register, update } = AccountValidator;
 
 const AccountRoutes = router();
 

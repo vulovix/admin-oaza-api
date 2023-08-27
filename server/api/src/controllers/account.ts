@@ -2,9 +2,9 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 import Config from "../config";
-import DateHelper from "../helpers/date.helper";
-import ResponseHelper from "../helpers/response.helper";
-import AccountModel from "../models/account.model";
+import DateHelper from "../helpers/date";
+import ResponseHelper from "../helpers/response";
+import AccountModel from "../models/account";
 
 const { NotFound, Ok, EmailOccupied } = ResponseHelper;
 

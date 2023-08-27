@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-const CommonSchema = {
+const CommonValidator = {
   objectId: Joi.object().keys({
     param: Joi.string()
       .regex(/^[0-9a-fA-F]{24}$/)
@@ -14,4 +14,4 @@ const CommonSchema = {
   }),
 };
 
-export default CommonSchema;
+export default CommonValidator;

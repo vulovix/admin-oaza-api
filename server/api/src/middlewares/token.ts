@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 
 import Config from "../config";
-import ResponseHelper from "../helpers/response.helper";
+import ResponseHelper from "../helpers/response";
 
 function tokenMiddleware(req, res, next): void {
   const token = req.cookies["Authorization"];

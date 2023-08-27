@@ -4,8 +4,9 @@ import express from "express";
 import mongoose from "mongoose";
 
 import Config from "./config";
-import AccountRoutes from "./routes/account.routes";
-import testRoutes from "./routes/test.routes";
+import AccountRoutes from "./routes/account";
+import ArticleRoutes from "./routes/article";
+import CategoryRoutes from "./routes/category";
 
 const app = express();
 
@@ -21,11 +22,14 @@ mongoose
     console.log("API app, connecting failed.", e);
   });
 
-app.use(bodyParser.json());
+app.use(bodyParser.json({ limit: "1mb" }));
+app.use(bodyParser.urlencoded({ extended: true, limit: "1mb" }));
+
 app.use(cookieParser());
 
-app.use("/api/test", testRoutes);
 app.use("/api/accounts", AccountRoutes);
+app.use("/api/categories", CategoryRoutes);
+app.use("/api/articles", ArticleRoutes);
 // app.use("/api/ai", openAIRoutes);
 // app.use("/api/stream", streamRoutes);
 
