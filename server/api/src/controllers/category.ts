@@ -8,6 +8,10 @@ const CategoryController = {
     const result = await CategoryModel.find({}, ExcludedCategoryFields);
     res.status(200).json(result);
   },
+  getById: async (req, res): Promise<void> => {
+    const result = await CategoryModel.findOne({ _id: req.params.id }, ExcludedCategoryFields);
+    res.status(200).json(result);
+  },
   //   getCategoriesWithArticles: async (req, res) => {
   //     await ArticleModel.aggregate([
   //       {
@@ -74,8 +78,9 @@ const CategoryController = {
     const obj = await CategoryModel.findOne({ _id: id });
     if (!obj) return res.status(404).json({ message: "Category do not exist." });
     const data = req.value.body;
-    const result = await CategoryModel.findByIdAndUpdate(id, data);
-    res.status(200).json(Object.assign(result || {}, data));
+    await CategoryModel.findByIdAndUpdate(id, data);
+    const savedObj = await CategoryModel.findById(id, ExcludedCategoryFields);
+    res.status(200).json(savedObj);
   },
   remove: async (req, res): Promise<void> => {
     const { id } = req.value.params;
@@ -88,7 +93,9 @@ const CategoryController = {
       return res.status(403).json({ message: "This category is used in " + articles.length + " articles and can not be deleted." });
     }
     await CategoryModel.findByIdAndRemove(id);
-    res.status(200).json(obj);
+    res.status(200).json({
+      _id: id,
+    });
   },
 };
 
