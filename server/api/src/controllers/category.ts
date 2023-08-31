@@ -1,15 +1,19 @@
 import ArticleModel from "../models/article";
 import CategoryModel from "../models/category";
 
-const ExcludedCategoryFields = { __v: 0, createdAt: 0, modifiedAt: 0, createdBy: 0, modifiedBy: 0 };
+const ExcludedCategoryFields = { __v: 0, __id: 0, createdAt: 0, modifiedAt: 0, createdBy: 0, modifiedBy: 0 };
 
 const CategoryController = {
+  publicGet: async (req, res): Promise<void> => {
+    const result = await CategoryModel.find({}, ExcludedCategoryFields);
+    res.status(200).json(result);
+  },
   get: async (req, res): Promise<void> => {
     const result = await CategoryModel.find({}, ExcludedCategoryFields);
     res.status(200).json(result);
   },
   getById: async (req, res): Promise<void> => {
-    const result = await CategoryModel.findOne({ _id: req.params.id }, ExcludedCategoryFields);
+    const result = await CategoryModel.findOne({ slug: req.params.id }, ExcludedCategoryFields);
     res.status(200).json(result);
   },
   //   getCategoriesWithArticles: async (req, res) => {

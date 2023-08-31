@@ -6,6 +6,9 @@ const CommonValidator = {
       .regex(/^[0-9a-fA-F]{24}$/)
       .required(),
   }),
+  slug: Joi.object().keys({
+    param: Joi.string().required(),
+  }),
   username: Joi.object().keys({
     param: Joi.string().required(),
   }),

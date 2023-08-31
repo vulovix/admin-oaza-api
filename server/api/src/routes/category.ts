@@ -10,6 +10,8 @@ const { create, update } = CategoryValidator;
 
 const CategoryRoutes = router();
 
+CategoryRoutes.route("/public").get([], CategoryController.publicGet);
+
 CategoryRoutes.use(tokenMiddleware);
 
 CategoryRoutes.route("/").get([], CategoryController.get);

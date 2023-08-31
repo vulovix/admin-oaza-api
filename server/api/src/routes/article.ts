@@ -10,6 +10,10 @@ const { create, update } = ArticleValidator;
 
 const ArticleRoutes = router();
 
+ArticleRoutes.route("/public").get([], ArticleController.publicGet);
+ArticleRoutes.route("/public/:id").get([RouterHelper.validateParams(CommonValidator.slug, "id")], ArticleController.publicGetById);
+ArticleRoutes.route("/public/categories/:id").get([RouterHelper.validateParams(CommonValidator.slug, "id")], ArticleController.publicGetByCategoryId);
+
 ArticleRoutes.use(tokenMiddleware);
 
 ArticleRoutes.route("/").get([], ArticleController.get);
