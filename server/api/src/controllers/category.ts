@@ -13,7 +13,7 @@ const CategoryController = {
     res.status(200).json(result);
   },
   getById: async (req, res): Promise<void> => {
-    const result = await CategoryModel.findOne({ slug: req.params.id }, ExcludedCategoryFields);
+    const result = await CategoryModel.findOne({ _id: req.params.id }, ExcludedCategoryFields);
     res.status(200).json(result);
   },
   //   getCategoriesWithArticles: async (req, res) => {
