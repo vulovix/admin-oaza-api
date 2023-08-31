@@ -15,7 +15,9 @@
     "joi": "^17.9.2",
     "mongoose": "^7.4.5",
     "jsonwebtoken": "^9.0.1",
-    "bcryptjs": "^2.4.3"
+    "bcryptjs": "^2.4.3",
+    "openai": "^3.2.1",
+    "express-sse": "^0.5.3"
   },
   "devDependencies": {
     "@babel/core": "7.21.0",
