@@ -2,14 +2,18 @@ import ArticleModel from "../models/article";
 import CategoryModel from "../models/category";
 
 const ExcludedArticleFields = { __v: 0, createdAt: 0, modifiedAt: 0, createdBy: 0, modifiedBy: 0 };
-const ExcludedArticlePublicFields = { __id: 0, public: 0, ...ExcludedArticleFields };
+const ExcludedArticlePublicFields = { __v: 0, public: 0, modifiedAt: 0, createdBy: 0, modifiedBy: 0 };
 
 const ArticleController = {
   publicGet: async (req, res): Promise<void> => {
-    const result = await ArticleModel.find({ public: true }, ExcludedArticlePublicFields).populate({
-      path: "categories",
-      select: "slug name",
-    });
+    const result = await ArticleModel.find({ public: true }, ExcludedArticlePublicFields)
+      .sort({
+        createdAt: -1,
+      })
+      .populate({
+        path: "categories",
+        select: "slug name",
+      });
     res.status(200).json(result);
   },
   publicGetById: async (req, res): Promise<void> => {
@@ -22,10 +26,14 @@ const ArticleController = {
   publicGetByCategoryId: async (req, res): Promise<void> => {
     const category = await CategoryModel.findOne({ slug: req.params.id });
     if (category) {
-      const articles = await ArticleModel.find({}, ExcludedArticlePublicFields).populate({
-        path: "categories",
-        select: "slug name",
-      });
+      const articles = await ArticleModel.find({ public: true }, ExcludedArticlePublicFields)
+        .sort({
+          createdAt: -1,
+        })
+        .populate({
+          path: "categories",
+          select: "slug name",
+        });
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       res.status(200).json(articles.filter((a) => a.categories.some((c) => c.slug === category.slug)));
@@ -33,10 +41,14 @@ const ArticleController = {
     // res.status(200).json([]);
   },
   get: async (req, res): Promise<void> => {
-    const result = await ArticleModel.find({}, ExcludedArticleFields).populate({
-      path: "categories",
-      select: "_id slug name",
-    });
+    const result = await ArticleModel.find({}, { ...ExcludedArticleFields, description: 0, image: 0 })
+      .sort({
+        createdAt: -1,
+      })
+      .populate({
+        path: "categories",
+        select: "_id slug name",
+      });
     res.status(200).json(result);
   },
   getById: async (req, res): Promise<void> => {

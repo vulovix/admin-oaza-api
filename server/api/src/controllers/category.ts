@@ -1,7 +1,7 @@
 import ArticleModel from "../models/article";
 import CategoryModel from "../models/category";
 
-const ExcludedCategoryFields = { __v: 0, __id: 0, createdAt: 0, modifiedAt: 0, createdBy: 0, modifiedBy: 0 };
+const ExcludedCategoryFields = { __v: 0, createdAt: 0, modifiedAt: 0, createdBy: 0, modifiedBy: 0 };
 
 const CategoryController = {
   publicGet: async (req, res): Promise<void> => {
