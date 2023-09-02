@@ -30,7 +30,7 @@ const ArticleController = {
   publicGetByCategoryId: async (req, res): Promise<void> => {
     const category = await CategoryModel.findOne({ slug: req.params.id });
     if (category) {
-      const articles = await ArticleModel.find({ public: true }, ExcludedArticlePublicFields)
+      const articles = await ArticleModel.find({ public: true }, { ...ExcludedArticlePublicFields, description: 0, image: 0 })
         .sort({
           createdAt: -1,
         })
