@@ -6,7 +6,7 @@ const ExcludedArticlePublicFields = { __v: 0, public: 0, modifiedAt: 0, createdB
 
 const ArticleController = {
   publicGet: async (req, res): Promise<void> => {
-    const result = await ArticleModel.find({ public: true }, ExcludedArticlePublicFields)
+    const result = await ArticleModel.find({ public: true }, { ...ExcludedArticlePublicFields, description: 0, image: 0 })
       .sort({
         createdAt: -1,
       })
@@ -22,6 +22,10 @@ const ArticleController = {
       select: "slug name",
     });
     res.status(200).json(result);
+  },
+  publicGetImageById: async (req, res): Promise<void> => {
+    const result = await ArticleModel.findOne({ slug: req.params.id }, { image: 1 });
+    res.status(200).send(result?.image);
   },
   publicGetByCategoryId: async (req, res): Promise<void> => {
     const category = await CategoryModel.findOne({ slug: req.params.id });
