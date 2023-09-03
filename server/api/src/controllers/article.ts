@@ -17,7 +17,7 @@ const ArticleController = {
     res.status(200).json(result);
   },
   publicGetById: async (req, res): Promise<void> => {
-    const result = await ArticleModel.findOne({ slug: req.params.id }, ExcludedArticlePublicFields).populate({
+    const result = await ArticleModel.findOne({ slug: req.params.id }, { ...ExcludedArticlePublicFields, image: 0 }).populate({
       path: "categories",
       select: "slug name",
     });
