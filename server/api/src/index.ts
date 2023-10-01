@@ -7,9 +7,6 @@ import Config from "./config";
 import AccountRoutes from "./routes/account";
 import ArticleRoutes from "./routes/article";
 import CategoryRoutes from "./routes/category";
-import OpenAIRoutes from "./routes/openai";
-import StreamRoutes from "./routes/stream";
-
 const app = express();
 
 const port = process.env.PORT || 5001;
@@ -32,10 +29,6 @@ app.use(cookieParser());
 app.use("/api/accounts", AccountRoutes);
 app.use("/api/categories", CategoryRoutes);
 app.use("/api/articles", ArticleRoutes);
-app.use("/api/ai", OpenAIRoutes);
-app.use("/api/stream", StreamRoutes);
-// app.use("/api/ai", openAIRoutes);
-// app.use("/api/stream", streamRoutes);
 
 if (import.meta.env.PROD) {
   app.listen(port, () => {
